@@ -9,6 +9,9 @@
     <!-- Bootstrap -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Styles -->
+    <link href="styles.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,7 +20,53 @@
     <![endif]-->
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <h1>Calculator App <span class="label label-info">ALPHA</span></h1>
+
+    <div id="container">
+    	<div id="calculator" class="panel panel-default">
+    		<div class="panel-body">
+		    	Basic panel example
+
+		    	<div class="input-group">
+				  <input type="text" disabled class="form-control" placeholder="Press a number to start" aria-describedby="basic-addon2">
+				  <span class="input-group-addon" id="basic-addon2">Result</span>
+				</div>
+
+				<div class="row numberbuttons">
+
+				<div class="btn-group" role="group" aria-label="...">
+				  <button type="button" class="btn btn-default">7</button>
+				  <button type="button" class="btn btn-default">8</button>
+				  <button type="button" class="btn btn-default">9</button>
+				</div>
+
+				</div>
+
+				<div class="row numberbuttons">
+
+				<div class="btn-group" role="group" aria-label="...">
+				  <button type="button" class="btn btn-default">6</button>
+				  <button type="button" class="btn btn-default">5</button>
+				  <button type="button" class="btn btn-default">4</button>
+				</div>
+
+				</div>
+
+
+				<div class="row numberbuttons">
+
+				<div class="btn-group" role="group" aria-label="...">
+				  <button type="button" class="btn btn-default">3</button>
+				  <button type="button" class="btn btn-default">2</button>
+				  <button type="button" class="btn btn-default">1</button>
+				</div>
+
+				</div>
+		 	</div>
+    	</div>
+
+
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

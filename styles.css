@@ -1,0 +1,22 @@
+body {
+	
+}
+
+h1 {
+	text-align: center;
+
+}
+
+#container {
+	margin-top: 50px;
+}
+
+#calculator {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.numberbuttons{
+	text-align: center;
+	width: 50%;
+}
