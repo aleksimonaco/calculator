@@ -32,37 +32,22 @@
 				  <span class="input-group-addon" id="basic-addon2">Result</span>
 				</div>
 
-				<div class="row numberbuttons">
+        <script id="button-template" type="text/x-handlebars-template">
+        {{#buttons}}
+          <div class="row">
 
-				<div class="btn-group" role="group" aria-label="...">
-				  <button type="button" class="btn btn-default">7</button>
-				  <button type="button" class="btn btn-default">8</button>
-				  <button type="button" class="btn btn-default">9</button>
-				</div>
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default">{{leftButton}}</button>
+              <button type="button" class="btn btn-default">{{centerButton}}</button>
+              <button type="button" class="btn btn-default">{{rightButton}}</button>
+            </div>
 
-				</div>
+          </div>
+        {{/buttons}}
+        </script>
 
-				<div class="row numberbuttons">
+				<div class="row numberbuttons"></div>
 
-				<div class="btn-group" role="group" aria-label="...">
-				  <button type="button" class="btn btn-default">6</button>
-				  <button type="button" class="btn btn-default">5</button>
-				  <button type="button" class="btn btn-default">4</button>
-				</div>
-
-				</div>
-
-
-				<div class="row numberbuttons">
-
-				<div class="btn-group" role="group" aria-label="...">
-				  <button type="button" class="btn btn-default">3</button>
-				  <button type="button" class="btn btn-default">2</button>
-				  <button type="button" class="btn btn-default">1</button>
-				</div>
-
-				</div>
-		 	</div>
     	</div>
 
 
@@ -70,7 +55,10 @@
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Handlebar 2.0.0 -->
+    <script src="dist/js/handlebars-v2.0.0.js"></script> 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="dist/js/bootstrap.min.js"></script>
+    <script src="calculator.js"></script>
   </body>
 </html>
