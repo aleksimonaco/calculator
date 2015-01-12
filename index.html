@@ -28,7 +28,7 @@
 		    	Basic panel example
 
 		    	<div class="input-group">
-				  <input type="text" disabled class="form-control" placeholder="Press a number to start" aria-describedby="basic-addon2">
+				  <input id="progress" type="text" disabled class="form-control" placeholder="Press a number to start" aria-describedby="basic-addon2" value="0">
 				  <span class="input-group-addon" id="basic-addon2">Result</span>
 				</div>
 
@@ -37,9 +37,9 @@
           <div class="row">
 
             <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-default">{{leftButton}}</button>
-              <button type="button" class="btn btn-default">{{centerButton}}</button>
-              <button type="button" class="btn btn-default">{{rightButton}}</button>
+              <button id="{{leftButton}}" type="button" class="btn btn-default numberbutton" value="{{leftButton}}">{{leftButton}}</button>
+              <button id="{{centerButton}}" type="button" class="btn btn-default numberbutton" value="{{centerButton}}">{{centerButton}}</button>
+              <button id="{{rightButton}}" type="button" class="btn btn-default numberbutton" value="{{rightButton}}">{{rightButton}}</button>
             </div>
 
           </div>
