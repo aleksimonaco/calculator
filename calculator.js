@@ -5,31 +5,40 @@ var data = {
 	buttons: [ {
 		leftButton: 7,
 		centerButton: 8,
-		rightButton: 9
+		rightButton: 9,
+		calculationButton: " + "
 	}, {
 		leftButton: 4,
 		centerButton: 5,
-		rightButton: 6
+		rightButton: 6,
+		calculationButton: " - "
 	}, {
 		leftButton: 1,
 		centerButton: 2,
-		rightButton: 3
+		rightButton: 3,
+		calculationButton: " * "
 	}, {
 		leftButton: ".",
+		leftButtonString: "dot",
 		centerButton: 0,
-		rightButton: "-"
+		rightButton: "-",
+		calculationButton: " / "
 	}
 	]
 };
 
+//Add the buttons the div with class numberbuttons
 $('.numberbuttons').append(template(data));
 
 //Click functions for the numberpad (only the numbers)
 $("#button1, #button2, #button3, #button4, #button5, #button6, #button7, #button8, #button9, #button0").click(function() {
-	if($("#progress").val() == 0){
+
+	var progress = $("#progress").val();
+
+	if(progress == 0 && progress.indexOf(".") == -1){
 		$("#progress").val($(this).val());
 	}else{
-		$("#progress").val($("#progress").val() + $(this).val());
+		$("#progress").val(progress + $(this).val());
 	}
 });
 
@@ -43,6 +52,19 @@ $("#button-").click(function(){
 		}
 	}
 })
+
+//Click function for the dot button (.)
+$("#buttondot").click(function(){
+	if($("#progress").val().indexOf(".") == -1){
+		$("#progress").val($("#progress").val() + $(this).val());
+	}
+});
+
+//Click functions for the logical operator buttons
+$(".calculationButton").click(function(){
+	$(".panel-heading").append($("#progress").val() + $(this).val());
+	$("#progress").val(0);
+});
 
 //Hover effect for github logo
 $("#github").hover(function(){
