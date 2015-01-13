@@ -43,3 +43,10 @@ $("#button-").click(function(){
 		}
 	}
 })
+
+//Hover effect for github logo
+$("#github").hover(function(){
+	$(this).attr("src", "img/GitHub-Mark-Light-32px.png")
+}, function(){
+	 $(this).attr("src", "img/GitHub-Mark-32px.png")
+});

@@ -20,12 +20,27 @@
     <![endif]-->
   </head>
   <body>
-    <h1>Calculator App <span class="label label-info">ALPHA</span></h1>
+
 
     <div id="container">
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    </div><!-- /.container-fluid -->
+</nav>
+
     	<div id="calculator" class="panel panel-default">
     		<div class="panel-body">
-		    	Basic panel example
 
 		    	<div class="input-group">
 				  <input id="progress" type="text" disabled class="form-control" placeholder="Press a number to start" aria-describedby="basic-addon2" value="0">
@@ -49,10 +64,20 @@
 
 				<div class="row numberbuttons"></div>
 
-    	</div>
+    	</div><!-- /.panel-body -->
 
 
-    </div>
+    </div><!-- /#calculator -->
+
+    <div id="footer">
+    <a target="_blank" href="https://github.com/aleksimonaco/calculator">
+     <img id="github" src="img/GitHub-Mark-32px.png" alt="GitHub Mark Logo"/>
+    </a>
+  </div>
+
+  </div><!-- /#container -->
+
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -62,4 +87,5 @@
     <script src="dist/js/bootstrap.min.js"></script>
     <script src="calculator.js"></script>
   </body>
+  
 </html>
