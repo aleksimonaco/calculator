@@ -32,14 +32,15 @@
 				  <span class="input-group-addon" id="basic-addon2">Result</span>
 				</div>
 
+        <!-- Handlebar template for a set of number buttons -->
         <script id="button-template" type="text/x-handlebars-template">
         {{#buttons}}
           <div class="row">
 
             <div class="btn-group" role="group" aria-label="...">
-              <button id="{{leftButton}}" type="button" class="btn btn-default numberbutton" value="{{leftButton}}">{{leftButton}}</button>
-              <button id="{{centerButton}}" type="button" class="btn btn-default numberbutton" value="{{centerButton}}">{{centerButton}}</button>
-              <button id="{{rightButton}}" type="button" class="btn btn-default numberbutton" value="{{rightButton}}">{{rightButton}}</button>
+              <button id="button{{leftButton}}" type="button" class="btn btn-default numberbutton" value="{{leftButton}}">{{leftButton}}</button>
+              <button id="button{{centerButton}}" type="button" class="btn btn-default numberbutton" value="{{centerButton}}">{{centerButton}}</button>
+              <button id="button{{rightButton}}" type="button" class="btn btn-default numberbutton" value="{{rightButton}}">{{rightButton}}</button>
             </div>
 
           </div>

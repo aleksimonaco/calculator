@@ -24,10 +24,22 @@ var data = {
 
 $('.numberbuttons').append(template(data));
 
-$("#1, #2, #3, #4, #5, #6, #7, #8, #9, #0").click(function() {
+//Click functions for the numberpad (only the numbers)
+$("#button1, #button2, #button3, #button4, #button5, #button6, #button7, #button8, #button9, #button0").click(function() {
 	if($("#progress").val() == 0){
 		$("#progress").val($(this).val());
 	}else{
 		$("#progress").val($("#progress").val() + $(this).val());
 	}
 });
+
+//Click function for the negative button (-)
+$("#button-").click(function(){
+	if($("#progress").val() != 0){
+		if($("#progress").val().charAt(0) == "-"){
+			$("#progress").val($("#progress").val().substr(1));
+		}else{
+			$("#progress").val("-" + $("#progress").val());
+		}
+	}
+})
