@@ -9,6 +9,10 @@
     <!-- Bootstrap -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Font Awesome -->    
+    <link href="http:///maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
     <!-- Styles -->
     <link href="styles.css" rel="stylesheet">
 
@@ -46,8 +50,8 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-    	<div id="calculator" class="panel panel-default">
-        <div class="panel-heading">Result </div>
+    	<div id="calculator" class="panel panel-default hidden-xs hidden-sm">
+        <div class="panel-heading">Result<div id="result"></div> </div>
     		<div class="panel-body">
 
 		    	<div class="input-group">
@@ -56,7 +60,7 @@
 				</div>
 
         <!-- Handlebar template for a set of number buttons -->
-        <script id="button-template" type="text/x-handlebars-template">
+<script id="button-template" type="text/x-handlebars-template">
         {{#buttons}}
           <div class="row">
 
@@ -72,14 +76,23 @@
               <button id="button{{rightButton}}" type="button" class="btn btn-default button" value="{{rightButton}}">{{rightButton}}</button>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-5">
             <button class="btn btn-primary button calculationButton" value="{{calculationButton}}">{{calculationButton}}</button>
+            {{#if emptyButton}}
+              <button id="{{emptyButton}}" class="btn btn-danger button" value="{{emptyButton}}">{{emptyButton}}</button>
+            {{else}}
+              {{#if calculateButton}}
+                <button id="calculateButton" class="btn btn-success button" value="{{calculateButton}}">{{calculateButton}}</button>
+              {{else}}
+                <button class="btn btn-default button" value="{{specialButton}}">{{specialButton}}</button>
+              {{/if}}
+            {{/if}}
             </div>
 
             </div>
           </div>
         {{/buttons}}
-        </script>
+</script>
 
 				<div class="row numberbuttons"></div>
 
@@ -87,6 +100,12 @@
 
 
     </div><!-- /#calculator -->
+
+
+    <!-- Responsive version of the calculator -->
+    <div id="responsive" class="alert alert-danger hidden-lg hidden-md">
+      <i class="fa fa-mobile fa-fw fa-2x"></i> Responsive view coming later
+    </div><!-- /#responsive -->
 
     <div id="footer">
     <a target="_blank" href="https://github.com/aleksimonaco/calculator">

@@ -6,23 +6,27 @@ var data = {
 		leftButton: 7,
 		centerButton: 8,
 		rightButton: 9,
-		calculationButton: " + "
+		calculationButton: " + ",
+		emptyButton: "C"
 	}, {
 		leftButton: 4,
 		centerButton: 5,
 		rightButton: 6,
-		calculationButton: " - "
+		calculationButton: " - ",
+		specialButton: " √"
 	}, {
 		leftButton: 1,
 		centerButton: 2,
 		rightButton: 3,
-		calculationButton: " * "
+		calculationButton: " * ",
+		specialButton: "2"
 	}, {
 		leftButton: ".",
 		leftButtonString: "dot",
 		centerButton: 0,
 		rightButton: "-",
-		calculationButton: " / "
+		calculationButton: " / ",
+		calculateButton: "="
 	}
 	]
 };
@@ -62,8 +66,57 @@ $("#buttondot").click(function(){
 
 //Click functions for the logical operator buttons
 $(".calculationButton").click(function(){
-	$(".panel-heading").append($("#progress").val() + $(this).val());
+
+	//If number ends with a dot (.), add two zeros to the end
+	if($("#progress").val().substr($("#progress").val().length - 1) == "."){
+		$("#progress").val($("#progress").val() + "00");
+	}
+
+	if($("#result").is(":empty")){
+		$("#result").prepend($("#progress").val() + $(this).val());
+	}else{
+		
+	}
+
 	$("#progress").val(0);
+});
+
+//When the "C" is pressed
+$("#C").click(function(){
+	$("#progress").val(0);
+});
+
+//Click function for "=" button
+$("#calculateButton").click(function(){
+	if($("#result").is(":empty")){
+		
+	}else{
+
+		var test = $("#result").html().split(" ");
+
+		//Get the two numbers
+		var firstNumber = parseInt(test[0]);
+		var secondNumber = parseInt($("#progress").val());
+
+		//Which operator, + - * /
+		var operator = test[1];
+
+		if(operator == "+"){
+			var result = firstNumber + secondNumber;
+			$("#result").html(result);
+		}else if(operator == "-"){
+
+		}else if(operator == "*"){
+
+		}else if(operator == "/"){
+
+		}else{
+			console.log("Unknown operator");
+		}
+
+		$("#progress").val(0);
+		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+	}
 });
 
 //Hover effect for github logo
