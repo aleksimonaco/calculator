@@ -116,6 +116,7 @@ $("#calculateButton").click(function(){
 
 			//Which operator, + - * /
 			operator = test[1];
+			lastMadeOperation = operator;
 		}else{
 			firstNumber = parseFloat($("#result").html());
 			secondNumber = parseFloat($("#progress").val());
