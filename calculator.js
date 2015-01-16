@@ -1,3 +1,28 @@
+/*=================================
+Navigation
+===================================*/
+
+$(document).ready(function(){
+	$("#about").hide();
+});
+
+$("#calculatorLink").click(function(){
+	$("#about").fadeOut(1000, function(){
+		$("#calculator").fadeIn(1000);
+	});
+});
+
+$("#aboutLink").click(function(){
+	$("#calculator").fadeOut(1000, function(){
+		$("#about").fadeIn(1000);
+	});
+});
+
+/*=================================
+Handlebar template
+===================================*/
+
+
 var source = $("#button-template").html();
 var template = Handlebars.compile(source);
 
@@ -34,6 +59,13 @@ var data = {
 //Add the buttons the div with class numberbuttons
 $('.numberbuttons').append(template(data));
 
+/*=================================
+Calculator button click functions
+===================================*/
+
+//Store last made calculation
+var lastMadeOperation = "";
+
 //Click functions for the numberpad (only the numbers)
 $("#button1, #button2, #button3, #button4, #button5, #button6, #button7, #button8, #button9, #button0").click(function() {
 
@@ -63,9 +95,6 @@ $("#buttondot").click(function(){
 		$("#progress").val($("#progress").val() + $(this).val());
 	}
 });
-
-//Store last made calculation
-var lastMadeOperation = "";
 
 //Click functions for the logical operator buttons
 $(".calculationButton").click(function(){
@@ -97,13 +126,24 @@ $("#C").click(function(){
 	$("#progress").val(0);
 });
 
+//When the square root and exponent buttons are pressed
+$(".specialButton").click(function(){
+	if($("#progress").val() != "0"){
+		if($(this).val() == 2){
+			$("#progress").val(Math.pow($("#progress").val(), 2));
+		}else{
+			$("#progress").val(Math.sqrt($("#progress").val(), 2));
+		}
+	};
+});
+
 //Click function for "=" button
 $("#calculateButton").click(function(){
 	if($("#result").is(":empty")){
 		
 	}else{
 
-		var test = $("#result").html().split(" ");
+		var resultStart = $("#result").html().split(" ");
 
 		var firstNumber;
 		var secondNumber;
@@ -111,11 +151,11 @@ $("#calculateButton").click(function(){
 
 		if(lastMadeOperation == ""){
 			//Get the two numbers and them as float
-			firstNumber = parseFloat(test[0]);
+			firstNumber = parseFloat(resultStart[0]);
 			secondNumber = parseFloat($("#progress").val());
 
 			//Which operator, + - * /
-			operator = test[1];
+			operator = resultStart[1];
 			lastMadeOperation = operator;
 		}else{
 			firstNumber = parseFloat($("#result").html());
@@ -131,6 +171,10 @@ $("#calculateButton").click(function(){
 		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 	}
 });
+
+/*=================================
+Calculation function TODO: QUnit tests
+===================================*/
 
 function performCalculation(firstNumber, secondNumber, operator){
 	var result;
@@ -150,6 +194,10 @@ function performCalculation(firstNumber, secondNumber, operator){
 
 	return result;
 }
+
+/*=================================
+Hover function for GitHub logo
+===================================*/
 
 //Hover effect for github logo
 $("#github").hover(function(){
