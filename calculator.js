@@ -64,6 +64,9 @@ $("#buttondot").click(function(){
 	}
 });
 
+//Store last made calculation
+var lastMadeOperation = "";
+
 //Click functions for the logical operator buttons
 $(".calculationButton").click(function(){
 
@@ -72,10 +75,18 @@ $(".calculationButton").click(function(){
 		$("#progress").val($("#progress").val() + "00");
 	}
 
+	//If there's already a calculation made
 	if($("#result").is(":empty")){
 		$("#result").prepend($("#progress").val() + $(this).val());
 	}else{
-		
+		var previousResult = parseFloat($("#result").html());
+		var progress = parseFloat($("#progress").val());
+		var result = performCalculation(previousResult, progress, $(this).val().trim());
+
+		lastMadeOperation = $(this).val().trim();
+
+		$("#result").html(result);
+		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 	}
 
 	$("#progress").val(0);
@@ -94,30 +105,50 @@ $("#calculateButton").click(function(){
 
 		var test = $("#result").html().split(" ");
 
-		//Get the two numbers
-		var firstNumber = parseInt(test[0]);
-		var secondNumber = parseInt($("#progress").val());
+		var firstNumber;
+		var secondNumber;
+		var operator;
 
-		//Which operator, + - * /
-		var operator = test[1];
+		if(lastMadeOperation == ""){
+			//Get the two numbers and them as float
+			firstNumber = parseFloat(test[0]);
+			secondNumber = parseFloat($("#progress").val());
 
-		if(operator == "+"){
-			var result = firstNumber + secondNumber;
-			$("#result").html(result);
-		}else if(operator == "-"){
-
-		}else if(operator == "*"){
-
-		}else if(operator == "/"){
-
+			//Which operator, + - * /
+			operator = test[1];
 		}else{
-			console.log("Unknown operator");
+			firstNumber = parseFloat($("#result").html());
+			secondNumber = parseFloat($("#progress").val());
+			operator = lastMadeOperation;
 		}
+
+		var result = performCalculation(firstNumber, secondNumber, operator);
+
+		$("#result").html(result);
 
 		$("#progress").val(0);
 		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 	}
 });
+
+function performCalculation(firstNumber, secondNumber, operator){
+	var result;
+
+	if(operator == "+"){
+			result = firstNumber + secondNumber;
+		}else if(operator == "-"){
+			result = firstNumber - secondNumber;
+		}else if(operator == "*"){
+			result = firstNumber * secondNumber;
+		}else if(operator == "/"){
+			result = firstNumber / secondNumber;
+		}else{
+			console.log("Unknown operator");
+			result = "Unknown";
+		}
+
+	return result;
+}
 
 //Hover effect for github logo
 $("#github").hover(function(){
