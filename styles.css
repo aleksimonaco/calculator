@@ -28,6 +28,14 @@ html, body {
 	margin: 0 auto;
 }
 
+#result-header {
+	font-size: 20px;
+}
+
+#result {
+	float: right;
+}
+
 .numberbuttons{
 	text-align: center;
 	margin-top: 30px;

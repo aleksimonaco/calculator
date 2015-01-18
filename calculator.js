@@ -7,14 +7,14 @@ $(document).ready(function(){
 });
 
 $("#calculatorLink").click(function(){
-	$("#about").fadeOut(1000, function(){
-		$("#calculator").fadeIn(1000);
+	$("#about").fadeOut(500, function(){
+		$("#calculator").fadeIn(500);
 	});
 });
 
 $("#aboutLink").click(function(){
-	$("#calculator").fadeOut(1000, function(){
-		$("#about").fadeIn(1000);
+	$("#calculator").fadeOut(500, function(){
+		$("#about").fadeIn(500);
 	});
 });
 
@@ -128,12 +128,14 @@ $("#C").click(function(){
 
 //When the square root and exponent buttons are pressed
 $(".specialButton").click(function(){
-	if($("#progress").val() != "0"){
+	if($("#result").html() != ""){
 		if($(this).val() == 2){
-			$("#progress").val(Math.pow($("#progress").val(), 2));
+			$("#result").html(Math.pow(parseFloat($("#result").html()), 2));
 		}else{
-			$("#progress").val(Math.sqrt($("#progress").val(), 2));
+			$("#result").html(Math.sqrt(parseFloat($("#result").html()), 2));
 		}
+
+		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
 	};
 });
 
