@@ -50,7 +50,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-    	<div id="calculator" class="panel panel-default hidden-xs hidden-sm">
+    	<div id="calculator" class="panel panel-default responsive-calculator">
         <div id="result-header" class="panel-heading">Result<div id="result"></div> </div>
     		<div class="panel-body">
 
@@ -59,30 +59,34 @@
 				  <span class="input-group-addon" id="basic-addon2">Progress</span>
 				</div><!-- .input-group -->
 
-        <!-- Handlebar template for a set of number buttons -->
+<!-- Handlebar template for a set of number buttons -->
 <script id="button-template" type="text/x-handlebars-template">
         {{#buttons}}
-          <div class="row">
+          <div class="row hidden-xs hidden-sm">
 
           <div class="btn-group col-md-6 col-md-offset-1" role="group" aria-label="...">
 
           {{#if leftButtonString}}
-            <button id="button{{leftButtonString}}" type="button" class="btn btn-default button" value="{{leftButton}}">{{leftButton}}</button>
+            <button type="button" class="btn btn-default button{{leftButtonString}} button btn-responsive" value="{{leftButton}}">{{leftButton}}</button>
           {{else}}
-            <button id="button{{leftButton}}" type="button" class="btn btn-default button" value="{{leftButton}}">{{leftButton}}</button>
+            <button type="button" class="btn btn-default numberbutton button" value="{{leftButton}}">{{leftButton}}</button>
           {{/if}}
 
-              <button id="button{{centerButton}}" type="button" class="btn btn-default button" value="{{centerButton}}">{{centerButton}}</button>
-              <button id="button{{rightButton}}" type="button" class="btn btn-default button" value="{{rightButton}}">{{rightButton}}</button>
+              <button type="button" class="btn btn-default numberbutton button" value="{{centerButton}}">{{centerButton}}</button>
+              {{#if rightButtonString}}
+              <button type="button" class="btn btn-default button{{rightButtonString}} button" value="{{rightButton}}">{{rightButton}}</button>
+              {{else}}
+                <button type="button" class="btn btn-default numberbutton button" value="{{rightButton}}">{{rightButton}}</button>
+              {{/if}}
             </div>
 
             <div class="col-md-5">
             <button class="btn btn-primary button calculationButton" value="{{calculationButton}}">{{calculationButton}}</button>
             {{#if emptyButton}}
-              <button id="{{emptyButton}}" class="btn btn-danger button" value="{{emptyButton}}">{{emptyButton}}</button>
+              <button class="btn btn-danger button {{emptyButton}}" data-toggle="tooltip" data-placement="right" title="Double-click to empty result" value="{{emptyButton}}">{{emptyButton}}</button>
             {{else}}
               {{#if calculateButton}}
-                <button id="calculateButton" class="btn btn-success button" value="{{calculateButton}}">{{calculateButton}}</button>
+                <button class="btn btn-success button calculateButton" value="{{calculateButton}}">{{calculateButton}}</button>
               {{else}}
                 {{#if specialButton}}
                  <button class="btn btn-default button specialButton" value="{{specialButton}}">{{specialButton}}</button>
@@ -96,18 +100,65 @@
         {{/buttons}}
 </script>
 
+<script id="upper-responsive-button-template" type="text/x-handlebars-template">
+
+{{#buttons}}
+
+<div class="row hidden-lg hidden-md">
+
+<div class="btn-group col-md-12 col-md-offset-1" role="group" aria-label="...">
+
+          {{#if leftButtonString}}
+            <button type="button" class="btn btn-default button{{leftButtonString}} button btn-responsive" value="{{leftButton}}">{{leftButton}}</button>
+          {{else}}
+            <button type="button" class="btn btn-default numberbutton button" value="{{leftButton}}">{{leftButton}}</button>
+          {{/if}}
+
+              <button type="button" class="btn btn-default numberbutton button" value="{{centerButton}}">{{centerButton}}</button>
+              {{#if rightButtonString}}
+              <button type="button" class="btn btn-default button{{rightButtonString}} button" value="{{rightButton}}">{{rightButton}}</button>
+              {{else}}
+                <button type="button" class="btn btn-default numberbutton button" value="{{rightButton}}">{{rightButton}}</button>
+              {{/if}}
+            </div>
+
+
+</div>
+{{/buttons}}
+</script>
+
+
+<script id="lower-responsive-button-template" type="text/x-handlebars-template">
+
+
+{{#buttons}}
+
+<div class="row hidden-lg hidden-md">
+
+            <div class="col-md-12">
+            <button class="btn btn-primary button calculationButton" value="{{basicCalculationButton}}">{{basicCalculationButton}}</button>
+                <button class="btn btn-primary button calculationButton" value="{{basicSecondCalculationButton}}">{{basicSecondCalculationButton}}</button>
+
+                 <button class="btn btn-default button specialButton" value="{{specialButton}}">{{specialButton}}</button>
+
+            {{#if emptyButton}}
+              <button class="btn btn-danger button {{emptyButton}}" data-toggle="tooltip" data-placement="top" title="Double-click to empty result" value="{{emptyButton}}">{{emptyButton}}</button>
+
+            {{else}}
+              <button class="btn btn-success button calculateButton" value="{{calculateButton}}">{{calculateButton}}</button>
+            {{/if}}
+            </div>
+
+            </div>
+  {{/buttons}}
+</script>
+
 				<div class="row numberbuttons"></div>
 
     	</div><!-- /.panel-body -->
 
 
     </div><!-- /#calculator -->
-
-
-    <!-- Responsive version of the calculator -->
-    <div id="responsive" class="alert alert-danger hidden-lg hidden-md">
-      <i class="fa fa-mobile fa-fw fa-2x"></i> Responsive view coming later
-    </div><!-- /#responsive -->
 
     <div id="about">About text</div>
 

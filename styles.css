@@ -1,3 +1,14 @@
+@media (max-width: 768px) {
+	.responsive-calculator {
+		width: 95% !important;
+		height: 530px;
+	}
+
+	.btn {
+		width: 70px !important;
+	}
+}
+
 html, body {
 	margin:0;
 	padding:0;

@@ -50,7 +50,23 @@ var data = {
 		leftButtonString: "dot",
 		centerButton: 0,
 		rightButton: "-",
+		rightButtonString: "slash",
 		calculationButton: " / ",
+		calculateButton: "="
+	}
+	]
+};
+
+var responsiveData = {
+	buttons: [{
+		basicCalculationButton: " + ",
+		basicSecondCalculationButton: " * ",
+		specialButton : "√",
+		emptyButton: "C"
+	}, {
+		basicCalculationButton: " - ",
+		basicSecondCalculationButton: " / ",
+		specialButton : "2",
 		calculateButton: "="
 	}
 	]
@@ -58,6 +74,24 @@ var data = {
 
 //Add the buttons the div with class numberbuttons
 $('.numberbuttons').append(template(data));
+
+//Initialize tooltips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+
+/*=======================================
+Handlebar template for responsive buttons
+========================================*/
+
+var sourceUpperResponsive = $("#upper-responsive-button-template").html();
+var templateUpperResponsive = Handlebars.compile(sourceUpperResponsive);
+
+var sourceLowerResponsive = $("#lower-responsive-button-template").html();
+var templateLowerResponsive = Handlebars.compile(sourceLowerResponsive);
+
+$('.numberbuttons').append(templateUpperResponsive(data));
+$('.numberbuttons').append(templateLowerResponsive(responsiveData));
 
 /*=================================
 Calculator button click functions
@@ -67,7 +101,7 @@ Calculator button click functions
 var lastMadeOperation = "";
 
 //Click functions for the numberpad (only the numbers)
-$("#button1, #button2, #button3, #button4, #button5, #button6, #button7, #button8, #button9, #button0").click(function() {
+$(".numberbutton").click(function() {
 
 	var progress = $("#progress").val();
 
@@ -79,7 +113,7 @@ $("#button1, #button2, #button3, #button4, #button5, #button6, #button7, #button
 });
 
 //Click function for the negative button (-)
-$("#button-").click(function(){
+$(".buttonslash").click(function(){
 	if($("#progress").val() != 0){
 		if($("#progress").val().charAt(0) == "-"){
 			$("#progress").val($("#progress").val().substr(1));
@@ -90,7 +124,7 @@ $("#button-").click(function(){
 })
 
 //Click function for the dot button (.)
-$("#buttondot").click(function(){
+$(".buttondot").click(function(){
 	if($("#progress").val().indexOf(".") == -1){
 		$("#progress").val($("#progress").val() + $(this).val());
 	}
@@ -121,9 +155,12 @@ $(".calculationButton").click(function(){
 	$("#progress").val(0);
 });
 
-//When the "C" is pressed
-$("#C").click(function(){
+//When the "C" is clicked
+$(".C").click(function(){
 	$("#progress").val(0);
+});
+$(".C").dblclick(function(){
+	$("#result").html('');
 });
 
 //When the square root and exponent buttons are pressed
@@ -140,7 +177,7 @@ $(".specialButton").click(function(){
 });
 
 //Click function for "=" button
-$("#calculateButton").click(function(){
+$(".calculateButton").click(function(){
 	if($("#result").is(":empty")){
 		
 	}else{
