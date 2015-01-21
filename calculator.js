@@ -93,9 +93,9 @@ var templateLowerResponsive = Handlebars.compile(sourceLowerResponsive);
 $('.numberbuttons').append(templateUpperResponsive(data));
 $('.numberbuttons').append(templateLowerResponsive(responsiveData));
 
-/*=================================
+/*===============================
 Calculator button click functions
-===================================*/
+=================================*/
 
 //Store last made calculation
 var lastMadeOperation = "";
@@ -211,9 +211,9 @@ $(".calculateButton").click(function(){
 	}
 });
 
-/*=================================
+/*====================================
 Calculation function TODO: QUnit tests
-===================================*/
+======================================*/
 
 function performCalculation(firstNumber, secondNumber, operator){
 	var result;
@@ -234,9 +234,9 @@ function performCalculation(firstNumber, secondNumber, operator){
 	return result;
 }
 
-/*=================================
+/*============================
 Hover function for GitHub logo
-===================================*/
+==============================*/
 
 //Hover effect for github logo
 $("#github").hover(function(){
