@@ -9,12 +9,14 @@
     <!-- Bootstrap -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Font Awesome -->    
+    <!-- Font Awesome by Dave Gandy - http://fontawesome.io -->    
     <link href="http:///maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
 
     <!-- Styles -->
     <link href="styles.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon(1).ico" type="image/x-icon" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,149 +27,181 @@
   </head>
   <body>
 
-<div id="container">
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a id="calculatorLink" class="navbar-brand" href="#">Calculator App</a>
+    <div id="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button id="toggleNavigation" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="calculatorLink" class="navbar-brand" href="#">Calculator</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a id="aboutLink" class="navLink" href="#">About <span class="sr-only">(current)</span></a></li>
+            </ul>
+
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+    <div id="calculator" class="panel panel-default responsive-calculator">
+      <div id="result-header" class="panel-heading">
+        Result
+        <div id="result"></div>
       </div>
+    	<div class="panel-body">
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a id="aboutLink" class="navLink" href="#">About <span class="sr-only">(current)</span></a></li>
-          <li><a class="navLink" href="#">Something</a></li>
-        </ul>
+      	<div class="input-group">
+      	  <input id="progress" type="text" disabled class="form-control" placeholder="Press a number to start" aria-describedby="basic-addon2" value="0">
+      	  <span class="input-group-addon" id="basic-addon2">Progress</span>
+        </div><!-- .input-group -->
 
-      </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-  </nav>
+        <!-- Handlebar template for a set of number buttons -->
+        <script id="button-template" type="text/x-handlebars-template">
+          {{#buttons}}
+            <div class="row hidden-xs hidden-sm">
 
-<div id="calculator" class="panel panel-default responsive-calculator">
-  <div id="result-header" class="panel-heading">Result<div id="result"></div> </div>
-	<div class="panel-body">
+            <div class="btn-group col-md-6 col-md-offset-1" role="group" aria-label="...">
 
-  	<div class="input-group">
-	  <input id="progress" type="text" disabled class="form-control" placeholder="Press a number to start" aria-describedby="basic-addon2" value="0">
-	  <span class="input-group-addon" id="basic-addon2">Progress</span>
-	</div><!-- .input-group -->
+              {{#if leftButtonString}}
+                <button type="button" class="btn btn-default button{{leftButtonString}} button btn-responsive" value="{{leftButton}}">{{leftButton}}</button>
+              {{else}}
+                <button type="button" class="btn btn-default numberbutton button" value="{{leftButton}}">{{leftButton}}</button>
+              {{/if}}
 
-  <!-- Handlebar template for a set of number buttons -->
-  <script id="button-template" type="text/x-handlebars-template">
-    {{#buttons}}
-      <div class="row hidden-xs hidden-sm">
+              <button type="button" class="btn btn-default numberbutton button" value="{{centerButton}}">{{centerButton}}</button>
+              {{#if rightButtonString}}
+              <button type="button" class="btn btn-default button{{rightButtonString}} button" value="{{rightButton}}">{{rightButton}}</button>
+              {{else}}
+                <button type="button" class="btn btn-default numberbutton button" value="{{rightButton}}">{{rightButton}}</button>
+              {{/if}}
+            </div> <!-- .btn-group -->
 
-      <div class="btn-group col-md-6 col-md-offset-1" role="group" aria-label="...">
+              <div class="col-md-5">
+              <button class="btn btn-primary button calculationButton" value="{{calculationButton}}">{{calculationButton}}</button>
+              {{#if emptyButton}}
+                <button class="btn btn-danger button {{emptyButton}}" data-toggle="tooltip" data-placement="right" title="Double-click to empty result" value="{{emptyButton}}">{{emptyButton}}</button>
+              {{else}}
+                {{#if calculateButton}}
+                  <button class="btn btn-success button calculateButton" value="{{calculateButton}}">{{calculateButton}}</button>
+                {{else}}
+                  {{#if specialButton}}
+                   <button class="btn btn-default button specialButton" value="{{specialButton}}">{{specialButton}}</button>
+                  {{/if}}
+                {{/if}}
+              {{/if}}
+              </div> <!-- col-md-5 -->
 
-        {{#if leftButtonString}}
-          <button type="button" class="btn btn-default button{{leftButtonString}} button btn-responsive" value="{{leftButton}}">{{leftButton}}</button>
-        {{else}}
-          <button type="button" class="btn btn-default numberbutton button" value="{{leftButton}}">{{leftButton}}</button>
-        {{/if}}
+            </div> <!-- .row -->
+          {{/buttons}}
+        </script>
 
-        <button type="button" class="btn btn-default numberbutton button" value="{{centerButton}}">{{centerButton}}</button>
-        {{#if rightButtonString}}
-        <button type="button" class="btn btn-default button{{rightButtonString}} button" value="{{rightButton}}">{{rightButton}}</button>
-        {{else}}
-          <button type="button" class="btn btn-default numberbutton button" value="{{rightButton}}">{{rightButton}}</button>
-        {{/if}}
-      </div> <!-- .btn-group -->
+      <script id="upper-responsive-button-template" type="text/x-handlebars-template">
 
-        <div class="col-md-5">
-        <button class="btn btn-primary button calculationButton" value="{{calculationButton}}">{{calculationButton}}</button>
-        {{#if emptyButton}}
-          <button class="btn btn-danger button {{emptyButton}}" data-toggle="tooltip" data-placement="right" title="Double-click to empty result" value="{{emptyButton}}">{{emptyButton}}</button>
-        {{else}}
-          {{#if calculateButton}}
-            <button class="btn btn-success button calculateButton" value="{{calculateButton}}">{{calculateButton}}</button>
-          {{else}}
-            {{#if specialButton}}
-             <button class="btn btn-default button specialButton" value="{{specialButton}}">{{specialButton}}</button>
+      {{#buttons}}
+
+        <div class="row hidden-lg hidden-md">
+
+          <div class="btn-group col-md-12 col-md-offset-1" role="group" aria-label="...">
+
+            {{#if leftButtonString}}
+              <button type="button" class="btn btn-default button{{leftButtonString}} button btn-responsive" value="{{leftButton}}">{{leftButton}}</button>
+            {{else}}
+              <button type="button" class="btn btn-default numberbutton button" value="{{leftButton}}">{{leftButton}}</button>
             {{/if}}
-          {{/if}}
-        {{/if}}
-        </div> <!-- col-md-5 -->
 
-      </div> <!-- .row -->
-    {{/buttons}}
-  </script>
+            <button type="button" class="btn btn-default numberbutton button" value="{{centerButton}}">{{centerButton}}</button>
+            {{#if rightButtonString}}
+            <button type="button" class="btn btn-default button{{rightButtonString}} button" value="{{rightButton}}">{{rightButton}}</button>
+            {{else}}
+              <button type="button" class="btn btn-default numberbutton button" value="{{rightButton}}">{{rightButton}}</button>
+            {{/if}}
 
-<script id="upper-responsive-button-template" type="text/x-handlebars-template">
+          </div>
 
-{{#buttons}}
+        </div>
 
-  <div class="row hidden-lg hidden-md">
+      {{/buttons}}
 
-    <div class="btn-group col-md-12 col-md-offset-1" role="group" aria-label="...">
-
-      {{#if leftButtonString}}
-        <button type="button" class="btn btn-default button{{leftButtonString}} button btn-responsive" value="{{leftButton}}">{{leftButton}}</button>
-      {{else}}
-        <button type="button" class="btn btn-default numberbutton button" value="{{leftButton}}">{{leftButton}}</button>
-      {{/if}}
-
-      <button type="button" class="btn btn-default numberbutton button" value="{{centerButton}}">{{centerButton}}</button>
-      {{#if rightButtonString}}
-      <button type="button" class="btn btn-default button{{rightButtonString}} button" value="{{rightButton}}">{{rightButton}}</button>
-      {{else}}
-        <button type="button" class="btn btn-default numberbutton button" value="{{rightButton}}">{{rightButton}}</button>
-      {{/if}}
-
-    </div>
-
-  </div>
-
-{{/buttons}}
-
-</script>
+      </script>
 
 
-<script id="lower-responsive-button-template" type="text/x-handlebars-template">
+      <script id="lower-responsive-button-template" type="text/x-handlebars-template">
 
-{{#buttons}}
+      {{#buttons}}
 
-  <div class="row hidden-lg hidden-md">
+        <div class="row hidden-lg hidden-md">
 
-    <div class="col-md-12">
-      <button class="btn btn-primary button calculationButton" value="{{basicCalculationButton}}">{{basicCalculationButton}}</button>
-      <button class="btn btn-primary button calculationButton" value="{{basicSecondCalculationButton}}">{{basicSecondCalculationButton}}</button>
+          <div class="col-md-12">
+            <button class="btn btn-primary button calculationButton" value="{{basicCalculationButton}}">{{basicCalculationButton}}</button>
+            <button class="btn btn-primary button calculationButton" value="{{basicSecondCalculationButton}}">{{basicSecondCalculationButton}}</button>
 
-      <button class="btn btn-default button specialButton" value="{{specialButton}}">{{specialButton}}</button>
+            <button class="btn btn-default button specialButton" value="{{specialButton}}">{{specialButton}}</button>
 
-      {{#if emptyButton}}
-        <button class="btn btn-danger button {{emptyButton}}" data-toggle="tooltip" data-placement="top" title="Double-click to empty result" value="{{emptyButton}}">{{emptyButton}}</button>
+            {{#if emptyButton}}
+              <button class="btn btn-danger button {{emptyButton}}" data-toggle="tooltip" data-placement="top" title="Double-click to empty result" value="{{emptyButton}}">{{emptyButton}}</button>
 
-      {{else}}
-        <button class="btn btn-success button calculateButton" value="{{calculateButton}}">{{calculateButton}}</button>
-      {{/if}}
-    </div> <!-- /.col-md-12 -->
+            {{else}}
+              <button class="btn btn-success button calculateButton" value="{{calculateButton}}">{{calculateButton}}</button>
+            {{/if}}
+          </div> <!-- /.col-md-12 -->
 
-  </div> <!-- /.row -->
+        </div> <!-- /.row -->
 
-{{/buttons}}
+      {{/buttons}}
 
-</script>
+      </script>
 
-    <div class="row numberbuttons"></div>
+        <div class="row numberbuttons"></div>
 
-  </div><!-- /.panel-body -->
-
+    </div><!-- /.panel-body -->
 
   </div><!-- /#calculator -->
 
-  <div id="about">About text</div>
+      <div id="about">
 
-  <div id="footer">
-    <a target="_blank" href="https://github.com/aleksimonaco/calculator">
-     <img id="github" src="img/GitHub-Mark-32px.png" alt="GitHub Mark Logo"/>
-    </a>
-  </div><!-- /#footer -->
+        <div id="description" class="panel panel-default">
+          <div class="panel-heading"><h3>About the project</h3></div>
+          
+        </div>
+
+        <div id="technologies" class="panel panel-default">
+          <div class="panel-heading"><h3>Technologies used</h3></div>
+            <!-- List group -->
+            <ul class="list-group">
+              <li class="list-group-item about-item">
+                <div class="alignleft">HTML5</div>
+                <i style="color:orange" class="fa fa-html5 fa-2x"></i>
+              </li>
+              <li class="list-group-item about-item">
+                <div class="alignleft">CSS3</div>
+                <i style="color:#6698ED" class="fa fa-css3 fa-2x"></i>
+              </li>
+              <li class="list-group-item about-item">
+                <div class="alignleft">Bootstrap</div>
+                <i style="color:#55acee" class="fa fa-twitter fa-2x"></i>
+              </li>
+              <li class="list-group-item about-item">
+                <div class="alignleft">Javascript/jQuery</div>
+                <i style="color:#D0D96A" class="fa fa-code fa-2x"></i>
+              </li>
+              <li class="list-group-item">HandlebarJS</li>
+            </ul>
+        </div> <!-- /#technologies -->
+
+      </div> <!-- /#about -->
+
+      <div id="footer">
+        <a target="_blank" href="https://github.com/aleksimonaco/calculator">
+         <i id="github" class="fa fa-github fa-3x"></i>
+        </a>
+      </div><!-- /#footer -->
 
   </div><!-- /#container -->
 
@@ -177,9 +211,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Handlebar 2.0.0 -->
     <script src="dist/js/handlebars-v2.0.0.js"></script> 
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Bootstrap Javascript-->
     <script src="dist/js/bootstrap.min.js"></script>
-    <!-- Own script -->
+    <!-- Calculator script -->
     <script src="calculator.js"></script>
   </body>
   

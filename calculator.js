@@ -2,18 +2,18 @@
 Navigation
 ===================================*/
 
-$(document).ready(function(){
+$(document).ready(function() {
 	$("#about").hide();
 });
 
-$("#calculatorLink").click(function(){
-	$("#about").fadeOut(500, function(){
+$("#calculatorLink").click(function() {
+	$("#about").fadeOut(500, function() {
 		$("#calculator").fadeIn(500);
 	});
 });
 
-$("#aboutLink").click(function(){
-	$("#calculator").fadeOut(500, function(){
+$("#aboutLink").click(function() {
+	$("#calculator").fadeOut(500, function() {
 		$("#about").fadeIn(500);
 	});
 });
@@ -77,7 +77,7 @@ $('.numberbuttons').append(template(data));
 
 //Initialize tooltips
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 /*=======================================
@@ -105,43 +105,43 @@ $(".numberbutton").click(function() {
 
 	var progress = $("#progress").val();
 
-	if(progress == 0 && progress.indexOf(".") == -1){
+	if (progress == 0 && progress.indexOf(".") == -1) {
 		$("#progress").val($(this).val());
-	}else{
+	} else {
 		$("#progress").val(progress + $(this).val());
 	}
 });
 
 //Click function for the negative button (-)
-$(".buttonslash").click(function(){
-	if($("#progress").val() != 0){
-		if($("#progress").val().charAt(0) == "-"){
+$(".buttonslash").click(function() {
+	if ($("#progress").val() != 0) {
+		if ($("#progress").val().charAt(0) == "-") {
 			$("#progress").val($("#progress").val().substr(1));
-		}else{
+		} else {
 			$("#progress").val("-" + $("#progress").val());
 		}
 	}
 })
 
 //Click function for the dot button (.)
-$(".buttondot").click(function(){
-	if($("#progress").val().indexOf(".") == -1){
+$(".buttondot").click(function() {
+	if ($("#progress").val().indexOf(".") == -1) {
 		$("#progress").val($("#progress").val() + $(this).val());
 	}
 });
 
 //Click functions for the logical operator buttons
-$(".calculationButton").click(function(){
+$(".calculationButton").click(function() {
 
 	//If number ends with a dot (.), add two zeros to the end
-	if($("#progress").val().substr($("#progress").val().length - 1) == "."){
+	if ($("#progress").val().substr($("#progress").val().length - 1) == ".") {
 		$("#progress").val($("#progress").val() + "00");
 	}
 
 	//If there's already a calculation made
-	if($("#result").is(":empty")){
+	if ($("#result").is(":empty")) {
 		$("#result").prepend($("#progress").val() + $(this).val());
-	}else{
+	} else {
 		var previousResult = parseFloat($("#result").html());
 		var progress = parseFloat($("#progress").val());
 		var result = performCalculation(previousResult, progress, $(this).val().trim());
@@ -149,38 +149,38 @@ $(".calculationButton").click(function(){
 		lastMadeOperation = $(this).val().trim();
 
 		$("#result").html(result);
-		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+		flashResultAfterCalculation();
 	}
 
 	$("#progress").val(0);
 });
 
 //When the "C" is clicked
-$(".C").click(function(){
+$(".C").click(function() {
 	$("#progress").val(0);
 });
-$(".C").dblclick(function(){
+$(".C").dblclick(function() {
 	$("#result").html('');
 });
 
 //When the square root and exponent buttons are pressed
-$(".specialButton").click(function(){
-	if($("#result").html() != ""){
-		if($(this).val() == 2){
+$(".specialButton").click(function() {
+	if($("#result").html() != "") {
+		if ($(this).val() == 2) {
 			$("#result").html(Math.pow(parseFloat($("#result").html()), 2));
-		}else{
+		} else {
 			$("#result").html(Math.sqrt(parseFloat($("#result").html()), 2));
 		}
 
-		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+		flashResultAfterCalculation();
 	};
 });
 
 //Click function for "=" button
-$(".calculateButton").click(function(){
-	if($("#result").is(":empty")){
+$(".calculateButton").click(function() {
+	if($("#result").is(":empty")) {
 		
-	}else{
+	} else {
 
 		var resultStart = $("#result").html().split(" ");
 
@@ -188,7 +188,7 @@ $(".calculateButton").click(function(){
 		var secondNumber;
 		var operator;
 
-		if(lastMadeOperation == ""){
+		if (lastMadeOperation == "") {
 			//Get the two numbers and them as float
 			firstNumber = parseFloat(resultStart[0]);
 			secondNumber = parseFloat($("#progress").val());
@@ -196,7 +196,7 @@ $(".calculateButton").click(function(){
 			//Which operator, + - * /
 			operator = resultStart[1];
 			lastMadeOperation = operator;
-		}else{
+		} else {
 			firstNumber = parseFloat($("#result").html());
 			secondNumber = parseFloat($("#progress").val());
 			operator = lastMadeOperation;
@@ -207,26 +207,26 @@ $(".calculateButton").click(function(){
 		$("#result").html(result);
 
 		$("#progress").val(0);
-		$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+		flashResultAfterCalculation();
 	}
 });
 
 /*====================================
-Calculation function TODO: QUnit tests
+Functions TODO: QUnit tests
 ======================================*/
 
-function performCalculation(firstNumber, secondNumber, operator){
+function performCalculation(firstNumber, secondNumber, operator) {
 	var result;
 
-	if(operator == "+"){
+	if (operator == "+") {
 			result = firstNumber + secondNumber;
-		}else if(operator == "-"){
+		} else if (operator == "-") {
 			result = firstNumber - secondNumber;
-		}else if(operator == "*"){
+		} else if (operator == "*") {
 			result = firstNumber * secondNumber;
-		}else if(operator == "/"){
+		} else if (operator == "/") {
 			result = firstNumber / secondNumber;
-		}else{
+		} else {
 			console.log("Unknown operator");
 			result = "Unknown";
 		}
@@ -234,13 +234,6 @@ function performCalculation(firstNumber, secondNumber, operator){
 	return result;
 }
 
-/*============================
-Hover function for GitHub logo
-==============================*/
-
-//Hover effect for github logo
-$("#github").hover(function(){
-	$(this).attr("src", "img/GitHub-Mark-Light-32px.png")
-}, function(){
-	 $(this).attr("src", "img/GitHub-Mark-32px.png")
-});
+function flashResultAfterCalculation() {
+	$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+}

@@ -1,8 +1,13 @@
 /* Responsive settings */
+
 @media (max-width: 768px) {
 	.responsive-calculator {
 		width: 95% !important;
 		height: 530px;
+	}
+
+	#about {
+		width: 75% !important;
 	}
 
 	.btn {
@@ -14,12 +19,32 @@
 	}
 }
 
+#responsive {
+	width: 70%;
+	margin:0 auto;
+	text-align: center;
+}
+
+#toggleNavigation {
+	background-color: white;
+}
+
+/* Overall styles */
+
 html, body {
 	margin:0;
 	padding:0;
 	height:100%;
-	background-color: #ecf0f1;
+	/* Background pattern from subtlepatterns.com */
+	background-image: url("img/old_mathematics/old_mathematics.png");
 }
+
+#container {
+	min-height:100%;
+	position:relative;
+}
+
+/* Navigation */
 
 .navbar {
 	background-color: #e74c3c;
@@ -33,11 +58,7 @@ html, body {
 	color: black !important;
 }
 
-
-#container {
-	min-height:100%;
-	position:relative;
-}
+/* Calculator */
 
 #calculator, #about {
 	width: 40%;
@@ -68,11 +89,17 @@ html, body {
 	width: 60px;
 }
 
-#responsive {
-	width: 70%;
-	margin:0 auto;
-	text-align: center;
+/* About page */
+
+.alignleft {
+	float: left;
 }
+
+.about-item {
+	text-align: right;
+}
+
+/* Footer */
 
 #footer {
 	background-color: #e74c3c;
@@ -84,4 +111,13 @@ html, body {
 	position:absolute;
 	bottom:0;
 	left:0;
+}
+
+#github {
+	color: rgb(0, 0, 0);
+	opacity: .5;
+}
+
+#github:hover {
+	opacity: 1;
 }
