@@ -3,18 +3,22 @@ Navigation
 ===================================*/
 
 $(document).ready(function() {
-	$("#about").hide();
-});
+
+	//For dragend
+	$("#container").dragend();
+	animateSwipeIcon("#angleRight");
+	animateSwipeIcon("#angleLeft");
+
 
 $("#calculatorLink").click(function() {
-	$("#about").fadeOut(500, function() {
-		$("#calculator").fadeIn(500);
+	$("#container").dragend({
+    	scrollToPage: 1
 	});
 });
 
 $("#aboutLink").click(function() {
-	$("#calculator").fadeOut(500, function() {
-		$("#about").fadeIn(500);
+	$("#container").dragend({
+    	scrollToPage: 2
 	});
 });
 
@@ -211,6 +215,8 @@ $(".calculateButton").click(function() {
 	}
 });
 
+});
+
 /*====================================
 Functions TODO: QUnit tests
 ======================================*/
@@ -236,4 +242,16 @@ function performCalculation(firstNumber, secondNumber, operator) {
 
 function flashResultAfterCalculation() {
 	$("#result").fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+}
+
+function animateSwipeIcon(direction) {
+	 $(direction).animate({
+		"marginLeft": "+=40px"
+		}, 1000, function() {
+		$(this).animate({
+			"marginLeft": "-=40px"
+		}, 1000, function() {
+			setInterval(animateSwipeIcon(direction), 2000);
+		});
+	});
 }
