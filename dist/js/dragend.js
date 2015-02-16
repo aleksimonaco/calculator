@@ -396,7 +396,7 @@
         // ensure swiping with one touch and not pinching
         if ( event.touches && event.touches.length > 1 || event.scale && event.scale !== 1) return;
 
-        event.preventDefault();
+        //event.preventDefault();
         if (this.settings.stopPropagation) {
           event.stopPropagation();
         }

@@ -97,6 +97,24 @@ var templateLowerResponsive = Handlebars.compile(sourceLowerResponsive);
 $('.numberbuttons').append(templateUpperResponsive(data));
 $('.numberbuttons').append(templateLowerResponsive(responsiveData));
 
+window.onkeyup = function(e) {
+   var key = e.keyCode ? e.keyCode : e.which;
+
+   if (key > 47 && key < 58) { //numbers from 0 - 9
+   		addNumberToProgress(String.fromCharCode(key));
+   }
+}
+
+function addNumberToProgress(number) {
+	var progress = $("#progress").val();
+
+	if (progress == 0 && progress.indexOf(".") == -1) {
+		$("#progress").val(number);
+	} else {
+		$("#progress").val(progress + number);
+	}
+}
+
 /*===============================
 Calculator button click functions
 =================================*/
