@@ -9,19 +9,6 @@ $(document).ready(function() {
 	animateSwipeIcon("#angleRight");
 	animateSwipeIcon("#angleLeft");
 
-
-$("#calculatorLink").click(function() {
-	$("#container").dragend({
-    	scrollToPage: 1
-	});
-});
-
-$("#aboutLink").click(function() {
-	$("#container").dragend({
-    	scrollToPage: 2
-	});
-});
-
 /*=================================
 Handlebar template
 ===================================*/
@@ -108,7 +95,7 @@ window.onkeyup = function(e) {
 function addNumberToProgress(number) {
 	var progress = $("#progress").val();
 
-	if (progress == 0 && progress.indexOf(".") == -1) {
+	if (parseInt(progress) === 0 && progress.indexOf(".") === -1) {
 		$("#progress").val(number);
 	} else {
 		$("#progress").val(progress + number);
@@ -124,10 +111,9 @@ var lastMadeOperation = "";
 
 //Click functions for the numberpad (only the numbers)
 $(".numberbutton").click(function() {
-
 	var progress = $("#progress").val();
 
-	if (progress == 0 && progress.indexOf(".") == -1) {
+	if (parseInt(progress) === 0 && progress.indexOf(".") === -1) {
 		$("#progress").val($(this).val());
 	} else {
 		$("#progress").val(progress + $(this).val());
@@ -136,8 +122,8 @@ $(".numberbutton").click(function() {
 
 //Click function for the negative button (-)
 $(".buttonslash").click(function() {
-	if ($("#progress").val() != 0) {
-		if ($("#progress").val().charAt(0) == "-") {
+	if ($("#progress").val() !== 0) {
+		if ($("#progress").val().charAt(0) === "-") {
 			$("#progress").val($("#progress").val().substr(1));
 		} else {
 			$("#progress").val("-" + $("#progress").val());
@@ -147,7 +133,7 @@ $(".buttonslash").click(function() {
 
 //Click function for the dot button (.)
 $(".buttondot").click(function() {
-	if ($("#progress").val().indexOf(".") == -1) {
+	if ($("#progress").val().indexOf(".") === -1) {
 		$("#progress").val($("#progress").val() + $(this).val());
 	}
 });
@@ -187,11 +173,14 @@ $(".C").dblclick(function() {
 
 //When the square root and exponent buttons are pressed
 $(".specialButton").click(function() {
-	if($("#result").html() != "") {
-		if ($(this).val() == 2) {
+
+	if($("#result").html() !== "") {
+		if (parseInt($(this).val()) === 2) {
 			$("#result").html(Math.pow(parseFloat($("#result").html()), 2));
 		} else {
-			$("#result").html(Math.sqrt(parseFloat($("#result").html()), 2));
+			if (parseFloat($("#result").html()) > 0) {
+				$("#result").html(Math.sqrt(parseFloat($("#result").html()), 2));
+			}
 		}
 
 		flashResultAfterCalculation();
@@ -204,23 +193,23 @@ $(".calculateButton").click(function() {
 		
 	} else {
 
-		var resultStart = $("#result").html().split(" ");
-
-		var firstNumber;
-		var secondNumber;
-		var operator;
+		var resultStart = $("#result").html().split(" "),
+			firstNumber,
+			secondNumber,
+			operator,
+			progress = $("#progress").val();
 
 		if (lastMadeOperation == "") {
 			//Get the two numbers and them as float
 			firstNumber = parseFloat(resultStart[0]);
-			secondNumber = parseFloat($("#progress").val());
+			secondNumber = parseFloat(progress);
 
 			//Which operator, + - * /
 			operator = resultStart[1];
 			lastMadeOperation = operator;
 		} else {
 			firstNumber = parseFloat($("#result").html());
-			secondNumber = parseFloat($("#progress").val());
+			secondNumber = parseFloat(progress);
 			operator = lastMadeOperation;
 		}
 
@@ -242,13 +231,13 @@ Functions TODO: QUnit tests
 function performCalculation(firstNumber, secondNumber, operator) {
 	var result;
 
-	if (operator == "+") {
+	if (operator === "+") {
 			result = firstNumber + secondNumber;
-		} else if (operator == "-") {
+		} else if (operator === "-") {
 			result = firstNumber - secondNumber;
-		} else if (operator == "*") {
+		} else if (operator === "*") {
 			result = firstNumber * secondNumber;
-		} else if (operator == "/") {
+		} else if (operator === "/") {
 			result = firstNumber / secondNumber;
 		} else {
 			console.log("Unknown operator");

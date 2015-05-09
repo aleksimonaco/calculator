@@ -40,7 +40,7 @@ html, body {
 	padding:0;
 	height:100%;
 	/* Background pattern from subtlepatterns.com */
-	background-image: url("img/old_mathematics/old_mathematics.png");
+	background-image: url("../img/old_mathematics/old_mathematics.png");
 }
 
 #container {
